@@ -1,0 +1,39 @@
+from subprocess import TimeoutExpired
+from typing import Any
+
+import speech_recognition as sr
+# Initialize recognizer class (for recognizing the speech)
+r = sr.Recognizer()
+#s= sr.Recognizer()
+# Reading Audio file as source
+# listening the audio file and store in audio_text variable
+
+while True:
+    with sr.Microphone() as source:
+        #tiempo_espera=1
+        
+        #audio=r.listen(source,timeout=10)
+
+        #audio=r.listen(source=timeout=10,phrase_time_limit=10)
+        #tiempo_max=1
+        print('Grabando y traduciendo:')
+        
+        
+        #phrase_time_=30 
+      
+        audio = r.listen(source,timeout=50,phrase_time_limit=30)
+        print(' espere')
+        r.adjust_for_ambient_noise(source,duration=40)
+        try:
+        # using google speech recognition
+            text = r.recognize_google(audio,language="es-MX")
+            #text =s.recognize_bing(audio,lenguage="es-MX")
+            print('Lo que hablaste en tu grabacion es: {}'.format(text))
+              
+        except:
+            print('Disculpa vuelve a intentarlo')  
+        
+        # except sr.UnknownValueError:
+        #         print('Disculpa vuelve a intentarlo')  
+        # except sr.RequestError as r:
+        #         print('Sin solicitud de mensajes')
